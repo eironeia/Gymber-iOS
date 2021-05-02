@@ -1,6 +1,0 @@
-framework module Pods_GymberTests {
-  umbrella header "Pods-GymberTests-umbrella.h"
-
-  export *
-  module * { export * }
-}

@@ -5,6 +5,9 @@
       location = "group:Gymber.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:Pods/Pods.xcodeproj">
+      location = "group:Domain">
+   </FileRef>
+   <FileRef
+      location = "group:Network">
    </FileRef>
 </Workspace>
