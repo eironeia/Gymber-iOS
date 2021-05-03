@@ -15,7 +15,7 @@ class GymberCardFooterView: UIView {
         )
     }
 
-    init(withTitle title: String?, subtitle: String?) {
+    init(title: String?, subtitle: String?) {
         super.init(frame: CGRect.zero)
         setupUI()
         setup(title: title, subtitle: subtitle)

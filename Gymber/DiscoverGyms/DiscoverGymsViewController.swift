@@ -87,7 +87,7 @@ extension DiscoverGymsViewController: SwipeCardStackDelegate {
         didSwipeCardAt index: Int,
         with direction: SwipeDirection
     ) {
-        let id = "" //cards[index].id
+        let id = cards[index].id
         switch direction {
         case .left:
             viewModel.swipeLeft(id: id)
@@ -118,11 +118,11 @@ extension DiscoverGymsViewController: SwipeCardStackDataSource {
             card.setOverlay(GymberCardOverlayView(direction: direction), forDirection: direction)
         }
 
-        let model = cards[index] // TODO: safe index
+        let model = cards[index] // TODO: Safe index
         card.content = GymberCardContentView(imageUrl: model.imageUrl)
         card.footer = GymberCardFooterView(
-            withTitle: "\(model.name)",
-            subtitle: "Distance from you: \(model.id)km"
+            title: model.name,
+            subtitle: model.distanceText
         )
 
         return card

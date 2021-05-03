@@ -3,7 +3,7 @@ import Domain
 
 protocol DiscoverGymsUseCaseInterface {
     func getNearbyGyms(completion: @escaping DiscoverGymsUseCase.GetNearbyGymsClosure)
-    func swipe(type: SwipeType, id: String)
+    func swipe(type: SwipeType, id: Int)
 }
 
 struct DiscoverGymsUseCase: DiscoverGymsUseCaseInterface {
@@ -16,7 +16,7 @@ struct DiscoverGymsUseCase: DiscoverGymsUseCaseInterface {
         gymProvider.getNearbyGyms(completion: completion)
     }
 
-    func swipe(type: SwipeType, id: String) {
+    func swipe(type: SwipeType, id: Int) {
         swipeProvider.swipe(type: type, id: id)
     }
 }

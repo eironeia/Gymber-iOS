@@ -4,7 +4,7 @@ import Domain
 public struct SwipeProvider: APIInterface, SwipeProviderInterface {
     public init() {}
 
-    public func swipe(type: SwipeType, id: String) {
+    public func swipe(type: SwipeType, id: Int) {
         switch type {
         case .left: break
         case let .right(onMatch):

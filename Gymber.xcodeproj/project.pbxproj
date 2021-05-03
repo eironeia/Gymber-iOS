@@ -220,9 +220,9 @@
 		FAD222FB263F148500DCF3EA /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				FAD222FC263F148E00DCF3EA /* GymberCardOverlayView.swift */,
-				FAF555E4263FDE7900676443 /* GymberCardFooterView.swift */,
 				FAF5560C263FE1BD00676443 /* GymberCardContentView.swift */,
+				FAF555E4263FDE7900676443 /* GymberCardFooterView.swift */,
+				FAD222FC263F148E00DCF3EA /* GymberCardOverlayView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";

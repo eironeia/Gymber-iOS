@@ -7,8 +7,8 @@ enum ErrorUIType: Error {
 
 protocol DiscoverGymsViewModelInterface {
     func getNearbyGyms(completion: @escaping DiscoverGymsViewModel.GetNearbyGymsClosure)
-    func swipeLeft(id: String)
-    func swipeRight(id: String, onMatch: @escaping () -> Void)
+    func swipeLeft(id: Int)
+    func swipeRight(id: Int, onMatch: @escaping () -> Void)
 }
 
 struct DiscoverGymsViewModel: DiscoverGymsViewModelInterface {
@@ -20,7 +20,9 @@ struct DiscoverGymsViewModel: DiscoverGymsViewModelInterface {
         useCase.getNearbyGyms { result in
             switch result {
             case let .success(gyms):
-                let gymsUIModel = gyms.map(GymUIModel.init(gym:))
+                let gymsUIModel = gyms.map {
+                    GymUIModel(gym: $0, distanceText: "123km") // TODO: Implement
+                }
                 completion(.success(gymsUIModel))
             case let .failure(error):
                 debugPrint(error) // TODO: this should be gone
@@ -29,15 +31,11 @@ struct DiscoverGymsViewModel: DiscoverGymsViewModelInterface {
         }
     }
 
-    func swipe(type: SwipeType, id: String, onMatch: @escaping () -> Void) {
-        useCase.swipe(type: type, id: id)
-    }
-
-    func swipeLeft(id: String) {
+    func swipeLeft(id: Int) {
         useCase.swipe(type: .left, id: id)
     }
 
-    func swipeRight(id: String, onMatch: @escaping () -> Void) {
+    func swipeRight(id: Int, onMatch: @escaping () -> Void) {
         useCase.swipe(type: .right(onMath: onMatch), id: id)
     }
 }

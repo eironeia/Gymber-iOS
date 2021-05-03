@@ -6,5 +6,5 @@ public protocol GymProviderInterface {
 
 // TODO: Move on different file
 public protocol SwipeProviderInterface {
-    func swipe(type: SwipeType, id: String)
+    func swipe(type: SwipeType, id: Int)
 }
