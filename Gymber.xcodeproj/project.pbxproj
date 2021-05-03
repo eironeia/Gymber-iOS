@@ -29,6 +29,7 @@
 		FAF5560D263FE1BD00676443 /* GymberCardContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF5560C263FE1BD00676443 /* GymberCardContentView.swift */; };
 		FAF55612263FE1EE00676443 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF55611263FE1EE00676443 /* UIView+Extension.swift */; };
 		FAF5566626403C1500676443 /* GymMatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF5566526403C1500676443 /* GymMatchView.swift */; };
+		FAF5566B2640439F00676443 /* LocationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF5566A2640439F00676443 /* LocationHandler.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +74,7 @@
 		FAF5560C263FE1BD00676443 /* GymberCardContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GymberCardContentView.swift; sourceTree = "<group>"; };
 		FAF55611263FE1EE00676443 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		FAF5566526403C1500676443 /* GymMatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GymMatchView.swift; sourceTree = "<group>"; };
+		FAF5566A2640439F00676443 /* LocationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationHandler.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -162,6 +164,7 @@
 		FA979435263C91510094A906 /* DiscoverGyms */ = {
 			isa = PBXGroup;
 			children = (
+				FAF5566A2640439F00676443 /* LocationHandler.swift */,
 				FAD222FB263F148500DCF3EA /* Views */,
 				FAAB2285263D5C2B00685708 /* DiscoverGymsUseCase.swift */,
 				FAAB228A263D5E3600685708 /* DiscoverGymsViewModel.swift */,
@@ -376,6 +379,7 @@
 				FAAB2286263D5C2B00685708 /* DiscoverGymsUseCase.swift in Sources */,
 				FAD222AB263EFD0600DCF3EA /* Autolayout+Extension.swift in Sources */,
 				FAF5566626403C1500676443 /* GymMatchView.swift in Sources */,
+				FAF5566B2640439F00676443 /* LocationHandler.swift in Sources */,
 				FAD222FD263F148E00DCF3EA /* GymberCardOverlayView.swift in Sources */,
 				FAAB22C6263ED93900685708 /* DiscoverGymsViewController.swift in Sources */,
 				FA97933F263C01030094A906 /* AppDelegate.swift in Sources */,

@@ -9,7 +9,8 @@ struct DiscoverGymsFactory {
             gymProvider: gymProvider,
             swipeProvider: swipeProvider
         )
+        let locationHandler = LocationAuthorizationHandler()
         let viewModel = DiscoverGymsViewModel(useCase: useCase)
-        return DiscoverGymsViewController(viewModel: viewModel)
+        return DiscoverGymsViewController(viewModel: viewModel, locationHandler: locationHandler)
     }
 }

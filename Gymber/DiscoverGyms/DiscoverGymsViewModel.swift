@@ -7,7 +7,7 @@ enum ErrorUIType: Error {
 }
 
 protocol DiscoverGymsViewModelInterface {
-    func getNearbyGyms(completion: @escaping DiscoverGymsViewModel.GetNearbyGymsClosure)
+    func getNearbyGyms(userLocation: CLLocation, completion: @escaping DiscoverGymsViewModel.GetNearbyGymsClosure)
     func swipeLeft(id: Int)
     func swipeRight(id: Int, onMatch: @escaping (Int) -> Void)
 }
@@ -17,15 +17,15 @@ struct DiscoverGymsViewModel: DiscoverGymsViewModelInterface {
 
     let useCase: DiscoverGymsUseCase
 
-    func getNearbyGyms(completion: @escaping GetNearbyGymsClosure) {
+    func getNearbyGyms(userLocation: CLLocation, completion: @escaping GetNearbyGymsClosure) {
         useCase.getNearbyGyms { result in
             switch result {
             case let .success(gyms):
                 let gymsUIModel = gyms.map { gym in
                     GymUIModel(
                         gym: gym,
-                        userLocation: CLLocation(latitude: 52.0907374, longitude: 5.1214201)
-                    ) // TODO: Implement
+                        userLocation: userLocation
+                    )
                 }
                 completion(.success(gymsUIModel))
             case let .failure(error):

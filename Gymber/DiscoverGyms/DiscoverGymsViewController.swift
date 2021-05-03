@@ -1,11 +1,13 @@
 import UIKit
 import Shuffle
+import CoreLocation
 
 final class DiscoverGymsViewController: UIViewController {
     private let cardsStackView = SwipeCardStack()
 
     private let viewModel: DiscoverGymsViewModelInterface
     private var cards: [GymUIModel] = []
+    private var locationHandler: LocationAuthorizationHandlerInterface
 
     private lazy var matchView: GymMatchView = {
         let matchView = GymMatchView()
@@ -14,8 +16,14 @@ final class DiscoverGymsViewController: UIViewController {
         return matchView
     }()
 
-    init(viewModel: DiscoverGymsViewModelInterface) {
+    var lastKnownLocation: CLLocation?
+
+    init(
+        viewModel: DiscoverGymsViewModelInterface,
+        locationHandler: LocationAuthorizationHandlerInterface
+    ) {
         self.viewModel = viewModel
+        self.locationHandler = locationHandler
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -27,9 +35,11 @@ final class DiscoverGymsViewController: UIViewController {
         super.viewDidLoad()
         setupUI()
 
-        viewModel.getNearbyGyms(completion: { [weak self] result in
-            self?.handleGetNearbyGymsResult(result)
-        })
+        locationHandler.onLocationStatusChanged = { [weak self] status in
+            self?.handle(locationStatus: status)
+        }
+
+        locationHandler.checkLocationServices()
     }
 }
 
@@ -104,6 +114,29 @@ private extension DiscoverGymsViewController {
             self.matchView.isHidden = true
         }
     }
+
+    func handle(locationStatus: LocationAuthorizationHandler.LocationStatus) {
+        navigationItem.rightBarButtonItems = nil
+        switch locationStatus {
+        case .notDetermined: break
+        case .restricted, .denied:
+            if let lastKnownLocation = lastKnownLocation {
+                getNearbyGyms(userLocation: lastKnownLocation)
+            } else {
+                let location = CLLocation(latitude: 52.0907374, longitude: 5.1214201)
+                getNearbyGyms(userLocation: location)
+            }
+        case let .authorized(location):
+            lastKnownLocation = location
+            getNearbyGyms(userLocation: location)
+        }
+    }
+
+    func getNearbyGyms(userLocation: CLLocation) {
+        viewModel.getNearbyGyms(userLocation: userLocation, completion: { [weak self] result in
+            self?.handleGetNearbyGymsResult(result)
+        })
+    }
 }
 
 extension DiscoverGymsViewController: SwipeCardStackDelegate {
@@ -127,7 +160,8 @@ extension DiscoverGymsViewController: SwipeCardStackDelegate {
     }
 
     func didSwipeAllCards(_ cardStack: SwipeCardStack) {
-        print("No more cards")
+        // TODO: No business rule has been defined for that scenario
+        debugPrint("No more cards")
     }
 
     func displayMatchAnimation(for uiModel: GymUIModel) {
@@ -159,4 +193,8 @@ extension DiscoverGymsViewController: SwipeCardStackDataSource {
     func numberOfCards(in cardStack: SwipeCardStack) -> Int {
         cards.count
     }
+}
+
+extension DiscoverGymsViewController {
+    
 }
