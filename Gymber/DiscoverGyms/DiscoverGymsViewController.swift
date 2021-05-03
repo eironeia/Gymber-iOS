@@ -115,7 +115,7 @@ extension DiscoverGymsViewController: SwipeCardStackDataSource {
         card.footerHeight = 80
         card.swipeDirections = [.left, .right]
         for direction in card.swipeDirections {
-            card.setOverlay(GymberCardOverlay(direction: direction), forDirection: direction)
+            card.setOverlay(GymberCardOverlayView(direction: direction), forDirection: direction)
         }
 
         let model = cards[index] // TODO: safe index

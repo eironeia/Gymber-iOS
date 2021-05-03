@@ -1,7 +1,7 @@
 import UIKit
 import Shuffle
 
-final class GymberCardOverlay: UIView {
+final class GymberCardOverlayView: UIView {
     init(direction: SwipeDirection) {
         super.init(frame: .zero)
         switch direction {
@@ -17,74 +17,84 @@ final class GymberCardOverlay: UIView {
     required init?(coder: NSCoder) {
         return nil
     }
-
 }
 
-private extension GymberCardOverlay {
+private extension GymberCardOverlayView {
     func createLeftOverlay() {
         let leftTextView = GymberCardOverlayLabelView(
-            withTitle: "NOPE",
-            color: .red,
-            rotation: CGFloat.pi / 10
+            title: "NOPE",
+            color: .nope
         )
         addSubview(leftTextView)
         leftTextView.anchor(
             top: topAnchor,
             trailing: trailingAnchor,
-            topConstant: 24,
-            leadingConstant: 12
+            topConstant: 12,
+            trailingConstant: 12
         )
     }
 
     func createRightOverlay() {
         let rightTextView = GymberCardOverlayLabelView(
-            withTitle: "LIKE",
-            color: .green,
-            rotation: -CGFloat.pi / 10
+            title: "LIKE",
+            color: .like
         )
         addSubview(rightTextView)
         rightTextView.anchor(
             top: topAnchor,
             leading: leadingAnchor,
-            topConstant: 24,
+            topConstant: 12,
             leadingConstant: 12
         )
     }
 }
 
 private class GymberCardOverlayLabelView: UIView {
-
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
         return label
     }()
 
-    init(withTitle title: String, color: UIColor, rotation: CGFloat) {
+    init(title: String, color: UIColor) {
         super.init(frame: CGRect.zero)
-        layer.borderColor = color.cgColor
+        setupUI()
+        setup(title: title, color: color)
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setupUI()
+    }
+}
+
+private extension GymberCardOverlayLabelView {
+    func setupUI() {
         layer.borderWidth = 4
         layer.cornerRadius = 4
-        transform = CGAffineTransform(rotationAngle: rotation)
 
+        setupLayout()
+    }
+
+    func setupLayout() {
         addSubview(titleLabel)
-        titleLabel.textColor = color
-        titleLabel.attributedText = NSAttributedString(
-            string: title,
-            attributes: NSAttributedString.Key.overlayAttributes
-        )
         titleLabel.anchor(
             top: topAnchor,
             leading: leadingAnchor,
             bottom: bottomAnchor,
             trailing: trailingAnchor,
             leadingConstant: 8,
-            trailingConstant: 3
+            trailingConstant: 8
         )
     }
 
-    required init?(coder aDecoder: NSCoder) {
-        return nil
+    func setup(title: String, color: UIColor) {
+        layer.borderColor = color.cgColor
+        titleLabel.attributedText = NSAttributedString(
+            string: title,
+            attributes: NSAttributedString.Key.overlayAttributes
+        )
+        titleLabel.textColor = color
     }
 }
 
@@ -94,4 +104,9 @@ extension NSAttributedString.Key {
         ?? .systemFont(ofSize: 42),
     .kern: 5.0
   ]
+}
+
+extension UIColor {
+  static var nope = UIColor(red: 252 / 255, green: 70 / 255, blue: 93 / 255, alpha: 1)
+  static var like = UIColor(red: 49 / 255, green: 193 / 255, blue: 109 / 255, alpha: 1)
 }
