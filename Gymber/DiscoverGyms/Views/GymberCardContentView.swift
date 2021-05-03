@@ -69,6 +69,5 @@ private extension GymberCardContentView {
         backgroundView.fillSuperview()
         backgroundView.addSubview(imageView)
         imageView.fillSuperview()
-
     }
 }

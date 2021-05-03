@@ -1,17 +1,31 @@
 import UIKit
 
 class GymberCardFooterView: UIView {
-
-    private let label = UILabel()
+    private let titleLabel = UILabel()
+    private let subtitleLabel = UILabel()
     private var gradientLayer: CAGradientLayer?
 
     override func layoutSubviews() {
         let padding: CGFloat = 24
-        label.frame = CGRect(
+        let spacing: CGFloat = 4
+        titleLabel.frame = CGRect(
             x: padding,
-            y: bounds.height - label.intrinsicContentSize.height - padding,
+            y: bounds.height
+                - titleLabel.intrinsicContentSize.height
+                - spacing
+                - subtitleLabel.intrinsicContentSize.height
+                - padding,
             width: bounds.width - 2 * padding,
-            height: label.intrinsicContentSize.height
+            height: titleLabel.intrinsicContentSize.height
+        )
+
+        subtitleLabel.frame = CGRect(
+            x: padding,
+            y: bounds.height
+                - subtitleLabel.intrinsicContentSize.height
+                - padding,
+            width: bounds.width - 2 * padding,
+            height: subtitleLabel.intrinsicContentSize.height
         )
     }
 
@@ -32,34 +46,26 @@ class GymberCardFooterView: UIView {
         layer.cornerRadius = 10
         clipsToBounds = true
         isOpaque = false
+
         setupLayout()
     }
 
     func setupLayout() {
-        addSubview(label)
+        [titleLabel, subtitleLabel].forEach(addSubview(_:))
     }
 
     func setup(title: String?, subtitle: String?) {
-        let attributedText = NSMutableAttributedString(
-            string: (title ?? "") + "\n",
+        titleLabel.attributedText = NSMutableAttributedString(
+            string: (title ?? ""),
             attributes: NSAttributedString.Key.titleAttributes
         )
-        if let subtitle = subtitle, !subtitle.isEmpty {
-            attributedText.append(
-                NSMutableAttributedString(
-                    string: subtitle,
-                    attributes: NSAttributedString.Key.subtitleAttributes
-                )
-            )
-            let paragraphStyle = NSMutableParagraphStyle()
-            paragraphStyle.lineSpacing = 4
-            paragraphStyle.lineBreakMode = .byTruncatingTail
-            attributedText.addAttributes([.paragraphStyle: paragraphStyle],
-                                         range: NSRange(location: 0, length: attributedText.length))
-            label.numberOfLines = 2
-        }
 
-        label.attributedText = attributedText
+        if let subtitle = subtitle, !subtitle.isEmpty {
+            subtitleLabel.attributedText = NSMutableAttributedString(
+                string: subtitle,
+                attributes: NSAttributedString.Key.subtitleAttributes
+            )
+        }
     }
 }
 
@@ -74,14 +80,14 @@ extension NSAttributedString.Key {
 
     static var titleAttributes: [NSAttributedString.Key: Any] = [
         // swiftlint:disable:next force_unwrapping
-        .font: UIFont(name: "ArialRoundedMTBold", size: 24)!,
+        .font: UIFont(name: "ArialRoundedMTBold", size: 20)!,
         .foregroundColor: UIColor.white,
         .shadow: NSAttributedString.Key.shadowAttribute
     ]
 
     static var subtitleAttributes: [NSAttributedString.Key: Any] = [
         // swiftlint:disable:next force_unwrapping
-        .font: UIFont(name: "Arial", size: 17)!,
+        .font: UIFont(name: "Arial", size: 16)!,
         .foregroundColor: UIColor.white,
         .shadow: NSAttributedString.Key.shadowAttribute
     ]

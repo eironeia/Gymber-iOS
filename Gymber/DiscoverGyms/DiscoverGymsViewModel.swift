@@ -1,5 +1,6 @@
 import Foundation
 import Domain
+import CoreLocation
 
 enum ErrorUIType: Error {
     case somethingWentWrong
@@ -20,8 +21,11 @@ struct DiscoverGymsViewModel: DiscoverGymsViewModelInterface {
         useCase.getNearbyGyms { result in
             switch result {
             case let .success(gyms):
-                let gymsUIModel = gyms.map {
-                    GymUIModel(gym: $0, distanceText: "123km") // TODO: Implement
+                let gymsUIModel = gyms.map { gym in
+                    GymUIModel(
+                        gym: gym,
+                        userLocation: CLLocation(latitude: 52.0907374, longitude: 5.1214201)
+                    ) // TODO: Implement
                 }
                 completion(.success(gymsUIModel))
             case let .failure(error):
