@@ -9,7 +9,7 @@ enum ErrorUIType: Error {
 protocol DiscoverGymsViewModelInterface {
     func getNearbyGyms(completion: @escaping DiscoverGymsViewModel.GetNearbyGymsClosure)
     func swipeLeft(id: Int)
-    func swipeRight(id: Int, onMatch: @escaping () -> Void)
+    func swipeRight(id: Int, onMatch: @escaping (Int) -> Void)
 }
 
 struct DiscoverGymsViewModel: DiscoverGymsViewModelInterface {
@@ -39,7 +39,7 @@ struct DiscoverGymsViewModel: DiscoverGymsViewModelInterface {
         useCase.swipe(type: .left, id: id)
     }
 
-    func swipeRight(id: Int, onMatch: @escaping () -> Void) {
+    func swipeRight(id: Int, onMatch: @escaping (Int) -> Void) {
         useCase.swipe(type: .right(onMath: onMatch), id: id)
     }
 }

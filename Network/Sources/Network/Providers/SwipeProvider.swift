@@ -8,8 +8,10 @@ public struct SwipeProvider: APIInterface, SwipeProviderInterface {
         switch type {
         case .left: break
         case let .right(onMatch):
-            // TODO: Implement match algorithm
-            onMatch()
+            let number = Int.random(in: 1...100)
+            if number == 5 {
+                onMatch(id)
+            }
         }
     }
 }

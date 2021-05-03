@@ -7,6 +7,13 @@ final class DiscoverGymsViewController: UIViewController {
     private let viewModel: DiscoverGymsViewModelInterface
     private var cards: [GymUIModel] = []
 
+    private lazy var matchView: GymMatchView = {
+        let matchView = GymMatchView()
+        matchView.isHidden = true
+        matchView.onCompletion = hideMatchView
+        return matchView
+    }()
+
     init(viewModel: DiscoverGymsViewModelInterface) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
@@ -47,6 +54,9 @@ private extension DiscoverGymsViewController {
             bottomConstant: 30,
             trailingConstant: 30
         )
+
+        view.addSubview(matchView)
+        matchView.fillSuperview()
     }
 
     func handleGetNearbyGymsResult(_ result: Result<[GymUIModel], ErrorUIType>) {
@@ -79,6 +89,21 @@ private extension DiscoverGymsViewController {
             print(error)
         }
     }
+
+    func showMatchView() {
+        UIView.animate(withDuration: 0.4, animations: {
+            self.matchView.isHidden = false
+            self.matchView.alpha = 1
+        })
+    }
+
+    func hideMatchView() {
+        UIView.animate(withDuration: 0.4, animations: {
+            self.matchView.alpha = 0
+        }) { finished in
+            self.matchView.isHidden = true
+        }
+    }
 }
 
 extension DiscoverGymsViewController: SwipeCardStackDelegate {
@@ -92,8 +117,9 @@ extension DiscoverGymsViewController: SwipeCardStackDelegate {
         case .left:
             viewModel.swipeLeft(id: id)
         case .right:
-            viewModel.swipeRight(id: id, onMatch: { [weak self] in
-                self?.displayMatchAnimation()
+            viewModel.swipeRight(id: id, onMatch: { [weak self] id in
+                guard let uiModel = self?.cards.first(where: { $0.id == id }) else { return }
+                self?.displayMatchAnimation(for: uiModel)
             })
         default:
             return
@@ -104,21 +130,23 @@ extension DiscoverGymsViewController: SwipeCardStackDelegate {
         print("No more cards")
     }
 
-    func displayMatchAnimation() {
-        print("Amazing match animation")
+    func displayMatchAnimation(for uiModel: GymUIModel) {
+        DispatchQueue.main.async {
+            self.matchView.setupSubtitle(subtitle: uiModel.name)
+            self.showMatchView()
+        }
     }
 }
 
 extension DiscoverGymsViewController: SwipeCardStackDataSource {
     func cardStack(_ cardStack: SwipeCardStack, cardForIndexAt index: Int) -> SwipeCard {
         let card = SwipeCard()
-        card.footerHeight = 80
         card.swipeDirections = [.left, .right]
         for direction in card.swipeDirections {
             card.setOverlay(GymberCardOverlayView(direction: direction), forDirection: direction)
         }
 
-        let model = cards[index] // TODO: Safe index
+        let model = cards[index]
         card.content = GymberCardContentView(imageUrl: model.imageUrl)
         card.footer = GymberCardFooterView(
             title: model.name,
