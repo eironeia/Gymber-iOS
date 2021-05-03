@@ -1,5 +1,9 @@
 import Foundation
 
+public struct Magic {
+    public init() {}
+}
+
 protocol APIInterface {
     func fetch<T: Decodable>(_ endpoint: Endpoint, completion: @escaping (Result<T, Error>) -> Void)
 }

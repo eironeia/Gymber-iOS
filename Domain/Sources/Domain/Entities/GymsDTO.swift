@@ -1,6 +1,6 @@
 import Foundation
 
-public struct GymsDTO: Codable {
+public struct GymsDTO: Decodable {
     public let gyms: [Gym]
 
     enum CodingKeys: String, CodingKey {

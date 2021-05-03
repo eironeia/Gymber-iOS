@@ -7,7 +7,8 @@ enum ErrorUIType: Error {
 
 protocol DiscoverGymsViewModelInterface {
     func getNearbyGyms(completion: @escaping DiscoverGymsViewModel.GetNearbyGymsClosure)
-    func swipe(type: SwipeType, id: String, onMatch: @escaping () -> Void)
+    func swipeLeft(id: String)
+    func swipeRight(id: String, onMatch: @escaping () -> Void)
 }
 
 struct DiscoverGymsViewModel: DiscoverGymsViewModelInterface {
@@ -29,6 +30,14 @@ struct DiscoverGymsViewModel: DiscoverGymsViewModelInterface {
     }
 
     func swipe(type: SwipeType, id: String, onMatch: @escaping () -> Void) {
+        useCase.swipe(type: type, id: id)
+    }
 
+    func swipeLeft(id: String) {
+        useCase.swipe(type: .left, id: id)
+    }
+
+    func swipeRight(id: String, onMatch: @escaping () -> Void) {
+        useCase.swipe(type: .right(onMath: onMatch), id: id)
     }
 }

@@ -1,8 +1,10 @@
 import Foundation
 import Domain
 
-struct GymProvider: APIInterface, GymProviderInterface {
-    func getNearbyGyms(completion: @escaping (Result<[Gym], Error>) -> Void) {
+public struct GymProvider: APIInterface, GymProviderInterface {
+    public init() {}
+
+    public func getNearbyGyms(completion: @escaping (Result<[Gym], Error>) -> Void) {
         fetch(.nearbyGyms) { (result: (Result<GymsDTO, Error>)) in
             switch result {
             case let .success(gymsDTO):
