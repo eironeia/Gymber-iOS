@@ -52,20 +52,11 @@ class DiscoverGymsUseCaseTests: XCTestCase {
         let expectation = self.expectation(description: "Closure not triggered")
         expectation.isInverted = true
 
-        sut.swipe(type: .right, id: "", onMatch: {
+        let id = 1
+        sut.swipe(type: .right(onMatch: { matchId in
+            XCTAssertEqual(id, matchId)
             expectation.fulfill()
-        })
-
-        waitForExpectations(timeout: 0.5)
-    }
-
-    func test_whenSwipeRight_andIsMatch_thenClosureTriggered() {
-        mockSwipeProvider.isMatch = true
-        let expectation = self.expectation(description: "Closure triggered")
-
-        sut.swipe(type: .right, id: "", onMatch: {
-            expectation.fulfill()
-        })
+        }), id: 1)
 
         waitForExpectations(timeout: 0.5)
     }

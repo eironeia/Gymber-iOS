@@ -7,8 +7,8 @@ protocol DiscoverGymsUseCaseInterface {
 }
 
 struct DiscoverGymsUseCase: DiscoverGymsUseCaseInterface {
-    typealias GetNearbyGymsClosure = (Result<[Gym],Error>) -> Void
-    
+    typealias GetNearbyGymsClosure = (Result<[Gym], Error>) -> Void
+
     let gymProvider: GymProviderInterface
     let swipeProvider: SwipeProviderInterface
 

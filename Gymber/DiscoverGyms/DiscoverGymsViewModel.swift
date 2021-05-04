@@ -15,7 +15,7 @@ protocol DiscoverGymsViewModelInterface {
 struct DiscoverGymsViewModel: DiscoverGymsViewModelInterface {
     typealias GetNearbyGymsClosure = (Result<[GymUIModel], ErrorUIType>) -> Void
 
-    let useCase: DiscoverGymsUseCase
+    let useCase: DiscoverGymsUseCaseInterface
 
     func getNearbyGyms(userLocation: CLLocation, completion: @escaping GetNearbyGymsClosure) {
         useCase.getNearbyGyms { result in
@@ -28,8 +28,7 @@ struct DiscoverGymsViewModel: DiscoverGymsViewModelInterface {
                     )
                 }
                 completion(.success(gymsUIModel))
-            case let .failure(error):
-                debugPrint(error) // TODO: this should be gone
+            case .failure:
                 completion(.failure(.somethingWentWrong)) // TODO: This should be handled better
             }
         }
@@ -40,6 +39,6 @@ struct DiscoverGymsViewModel: DiscoverGymsViewModelInterface {
     }
 
     func swipeRight(id: Int, onMatch: @escaping (Int) -> Void) {
-        useCase.swipe(type: .right(onMath: onMatch), id: id)
+        useCase.swipe(type: .right(onMatch: onMatch), id: id)
     }
 }

@@ -2,5 +2,5 @@ import Foundation
 
 public enum SwipeType {
     case left
-    case right(onMath: (Int) -> Void)
+    case right(onMatch: (Int) -> Void)
 }

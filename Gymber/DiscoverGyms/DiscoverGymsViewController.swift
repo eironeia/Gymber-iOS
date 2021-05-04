@@ -5,10 +5,6 @@ import CoreLocation
 final class DiscoverGymsViewController: UIViewController {
     private let cardsStackView = SwipeCardStack()
 
-    private let viewModel: DiscoverGymsViewModelInterface
-    private var cards: [GymUIModel] = []
-    private var locationHandler: LocationAuthorizationHandlerInterface
-
     private lazy var matchView: GymMatchView = {
         let matchView = GymMatchView()
         matchView.isHidden = true
@@ -16,7 +12,10 @@ final class DiscoverGymsViewController: UIViewController {
         return matchView
     }()
 
-    var lastKnownLocation: CLLocation?
+    private let viewModel: DiscoverGymsViewModelInterface
+    private var cards: [GymUIModel] = []
+    private var locationHandler: LocationAuthorizationHandlerInterface
+    private var lastKnownLocation: CLLocation?
 
     init(
         viewModel: DiscoverGymsViewModelInterface,

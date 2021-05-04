@@ -33,6 +33,18 @@ public struct Gym: Decodable {
         case longitude
     }
 
+    public init(
+        id: Int,
+        name: String,
+        imageUrl: String,
+        coordinates: CLLocation
+    ) {
+        self.id = id
+        self.name = name
+        self.imageUrl = imageUrl
+        self.coordinates = coordinates
+    }
+
     public init(from decoder: Decoder) throws {
         // id
         let container = try decoder.container(keyedBy: CodingKeys.self)
