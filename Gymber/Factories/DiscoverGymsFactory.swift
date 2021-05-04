@@ -1,5 +1,6 @@
 import UIKit
 import Network
+import Domain
 
 struct DiscoverGymsFactory {
     func makeDiscoverGymsViewController() -> UIViewController {

@@ -12,12 +12,8 @@
 		FA97934B263C01070094A906 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA979349263C01070094A906 /* LaunchScreen.storyboard */; };
 		FAAB2279263D57D900685708 /* Domain in Frameworks */ = {isa = PBXBuildFile; productRef = FAAB2278263D57D900685708 /* Domain */; };
 		FAAB227B263D57D900685708 /* Network in Frameworks */ = {isa = PBXBuildFile; productRef = FAAB227A263D57D900685708 /* Network */; };
-		FAAB2286263D5C2B00685708 /* DiscoverGymsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAAB2285263D5C2B00685708 /* DiscoverGymsUseCase.swift */; };
 		FAAB228B263D5E3600685708 /* DiscoverGymsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAAB228A263D5E3600685708 /* DiscoverGymsViewModel.swift */; };
 		FAAB2291263D5FA000685708 /* GymUIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAAB2290263D5FA000685708 /* GymUIModel.swift */; };
-		FAAB229A263EAFD900685708 /* DiscoverGymsUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAAB2299263EAFD900685708 /* DiscoverGymsUseCaseTests.swift */; };
-		FAAB22A3263EB2F400685708 /* MockGymProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAAB22A2263EB2F400685708 /* MockGymProviderTests.swift */; };
-		FAAB22AE263EB5EA00685708 /* MockSwipeProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAAB22AD263EB5EA00685708 /* MockSwipeProviderTests.swift */; };
 		FAAB22C6263ED93900685708 /* DiscoverGymsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAAB22C5263ED93900685708 /* DiscoverGymsViewController.swift */; };
 		FAAB22D3263EDB9700685708 /* DiscoverGymsFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAAB22D2263EDB9700685708 /* DiscoverGymsFactory.swift */; };
 		FAD222A5263EFCE500DCF3EA /* Shuffle in Frameworks */ = {isa = PBXBuildFile; productRef = FAD222A4263EFCE500DCF3EA /* Shuffle */; };
@@ -51,12 +47,8 @@
 		FA97934C263C01070094A906 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FA979351263C01080094A906 /* GymberTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GymberTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA979357263C01080094A906 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		FAAB2285263D5C2B00685708 /* DiscoverGymsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverGymsUseCase.swift; sourceTree = "<group>"; };
 		FAAB228A263D5E3600685708 /* DiscoverGymsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverGymsViewModel.swift; sourceTree = "<group>"; };
 		FAAB2290263D5FA000685708 /* GymUIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GymUIModel.swift; sourceTree = "<group>"; };
-		FAAB2299263EAFD900685708 /* DiscoverGymsUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverGymsUseCaseTests.swift; sourceTree = "<group>"; };
-		FAAB22A2263EB2F400685708 /* MockGymProviderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockGymProviderTests.swift; sourceTree = "<group>"; };
-		FAAB22AD263EB5EA00685708 /* MockSwipeProviderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockSwipeProviderTests.swift; sourceTree = "<group>"; };
 		FAAB22C5263ED93900685708 /* DiscoverGymsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverGymsViewController.swift; sourceTree = "<group>"; };
 		FAAB22D2263EDB9700685708 /* DiscoverGymsFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverGymsFactory.swift; sourceTree = "<group>"; };
 		FAD222AA263EFD0600DCF3EA /* Autolayout+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Autolayout+Extension.swift"; sourceTree = "<group>"; };
@@ -129,7 +121,6 @@
 		FA979354263C01080094A906 /* GymberTests */ = {
 			isa = PBXGroup;
 			children = (
-				FAAB22A1263EB2DC00685708 /* Mocks */,
 				FAAB2298263EAFCB00685708 /* DiscoverGymsTests */,
 				FA979357263C01080094A906 /* Info.plist */,
 			);
@@ -141,7 +132,6 @@
 			children = (
 				FAF5566A2640439F00676443 /* LocationHandler.swift */,
 				FAD222FB263F148500DCF3EA /* Views */,
-				FAAB2285263D5C2B00685708 /* DiscoverGymsUseCase.swift */,
 				FAAB228A263D5E3600685708 /* DiscoverGymsViewModel.swift */,
 				FAAB22C5263ED93900685708 /* DiscoverGymsViewController.swift */,
 			);
@@ -166,19 +156,9 @@
 		FAAB2298263EAFCB00685708 /* DiscoverGymsTests */ = {
 			isa = PBXGroup;
 			children = (
-				FAAB2299263EAFD900685708 /* DiscoverGymsUseCaseTests.swift */,
 				FAF5569D26404C2000676443 /* DiscoverGymsViewModelTests.swift */,
 			);
 			path = DiscoverGymsTests;
-			sourceTree = "<group>";
-		};
-		FAAB22A1263EB2DC00685708 /* Mocks */ = {
-			isa = PBXGroup;
-			children = (
-				FAAB22A2263EB2F400685708 /* MockGymProviderTests.swift */,
-				FAAB22AD263EB5EA00685708 /* MockSwipeProviderTests.swift */,
-			);
-			path = Mocks;
 			sourceTree = "<group>";
 		};
 		FAAB22D1263EDB8B00685708 /* Factories */ = {
@@ -324,7 +304,6 @@
 				FAF5560D263FE1BD00676443 /* GymberCardContentView.swift in Sources */,
 				FAAB228B263D5E3600685708 /* DiscoverGymsViewModel.swift in Sources */,
 				FAAB2291263D5FA000685708 /* GymUIModel.swift in Sources */,
-				FAAB2286263D5C2B00685708 /* DiscoverGymsUseCase.swift in Sources */,
 				FAD222AB263EFD0600DCF3EA /* Autolayout+Extension.swift in Sources */,
 				FAF5566626403C1500676443 /* GymMatchView.swift in Sources */,
 				FAF5566B2640439F00676443 /* LocationHandler.swift in Sources */,
@@ -340,10 +319,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FAAB22AE263EB5EA00685708 /* MockSwipeProviderTests.swift in Sources */,
-				FAAB22A3263EB2F400685708 /* MockGymProviderTests.swift in Sources */,
 				FAF5569E26404C2000676443 /* DiscoverGymsViewModelTests.swift in Sources */,
-				FAAB229A263EAFD900685708 /* DiscoverGymsUseCaseTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
