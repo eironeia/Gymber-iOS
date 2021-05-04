@@ -34,3 +34,11 @@ I decoupled the app with Domain and Network layer. I have used Swift Package Man
 * **Kingfisher:** I have used it to load the images from the URL, used mainly because of being handy, not because it's solves a big problem.
 
 * **Shuffle:** Due to limitaation of time, I decided to use Shuffle to implement the UI for the Tinder style. The reason that I went for that library, it's because it's an open source library, maintened and you can adapt or adjust as you please. Given that I am using only few of the functionalities of the library for future iterations might be convinient to have our own framework with only the files that we need.
+
+## App Screenshots
+
+<img width="300" alt="Screenshot 2021-05-04 at 11 28 23" src="https://user-images.githubusercontent.com/12100457/116984718-d6fa5280-accb-11eb-8eb7-05ff796998bf.png">
+
+<img width="300" alt="Screenshot 2021-05-04 at 11 27 42" src="https://user-images.githubusercontent.com/12100457/116984630-bf22ce80-accb-11eb-986d-eddd2111bdbf.png">
+
+<img width="300" alt="Screenshot 2021-05-04 at 11 27 52" src="https://user-images.githubusercontent.com/12100457/116984657-c518af80-accb-11eb-8a41-61726c8d8815.png">
