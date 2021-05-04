@@ -25,8 +25,12 @@ My decision for the architecture has been use MVVM. The reason behind that is th
 
 Other pattern that I have would have used is Coordinator pattern for handling the navigation. 
 
+I decoupled the app with Domain and Network layer. I have used Swift Package Manager for that, and the reason behind it, it's because it's the Apple native solution and I did want to experiment with it.
+
 ## Frameworks used
 
 * **PKHUD:** I have used it for the loader. I didn't want to necessarily spend so many time on creating a loader since UI was important but not critical. I have had experience with this framework and it has really nice and easy integration.
 
 * **Kingfisher:** I have used it to load the images from the URL, used mainly because of being handy, not because it's solves a big problem.
+
+* **Shuffle:** Due to limitaation of time, I decided to use Shuffle to implement the UI for the Tinder style. The reason that I went for that library, it's because it's an open source library, maintened and you can adapt or adjust as you please. Given that I am using only few of the functionalities of the library for future iterations might be convinient to have our own framework with only the files that we need.
