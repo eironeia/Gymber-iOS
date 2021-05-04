@@ -8,14 +8,21 @@ final class DiscoverGymsViewController: UIViewController {
     private lazy var matchView: GymMatchView = {
         let matchView = GymMatchView()
         matchView.isHidden = true
-        matchView.onCompletion = hideMatchView
+        matchView.onCompletion = { [weak self] in
+            DispatchQueue.main.async {
+                self?.hideMatchView()
+            }
+        }
         return matchView
     }()
 
     private let viewModel: DiscoverGymsViewModelInterface
-    private var cards: [GymUIModel] = []
     private var locationHandler: LocationAuthorizationHandlerInterface
+    private var cards: [GymUIModel] = []
     private var lastKnownLocation: CLLocation?
+    private let matchAnimationSemaphore = DispatchSemaphore(value: 1)
+    private let backgroundQueue = DispatchQueue.global(qos: .background)
+
 
     init(
         viewModel: DiscoverGymsViewModelInterface,
@@ -99,21 +106,6 @@ private extension DiscoverGymsViewController {
         }
     }
 
-    func showMatchView() {
-        UIView.animate(withDuration: 0.4, animations: {
-            self.matchView.isHidden = false
-            self.matchView.alpha = 1
-        })
-    }
-
-    func hideMatchView() {
-        UIView.animate(withDuration: 0.4, animations: {
-            self.matchView.alpha = 0
-        }) { finished in
-            self.matchView.isHidden = true
-        }
-    }
-
     func handle(locationStatus: LocationAuthorizationHandler.LocationStatus) {
         navigationItem.rightBarButtonItems = nil
         switch locationStatus {
@@ -136,6 +128,34 @@ private extension DiscoverGymsViewController {
             self?.handleGetNearbyGymsResult(result)
         })
     }
+
+    func displayMatchAnimation(for uiModel: GymUIModel) {
+        DispatchQueue.main.async {
+            self.matchView.setupSubtitle(subtitle: uiModel.name)
+            self.showMatchView()
+        }
+    }
+
+    func showMatchView() {
+        print("Entering animation")
+        UIView.animate(withDuration: 0.4, animations: {
+            self.matchView.isHidden = false
+            self.matchView.alpha = 1
+        })
+    }
+
+    func hideMatchView() {
+        print("Starting hiding animation")
+        UIView.animate(withDuration: 0.4, animations: {
+            self.matchView.alpha = 0
+        }) { finished in
+            self.matchView.isHidden = finished
+            if finished {
+                print("\(finished) hiding animation")
+                self.matchAnimationSemaphore.signal()
+            }
+        }
+    }
 }
 
 extension DiscoverGymsViewController: SwipeCardStackDelegate {
@@ -151,7 +171,10 @@ extension DiscoverGymsViewController: SwipeCardStackDelegate {
         case .right:
             viewModel.swipeRight(id: id, onMatch: { [weak self] id in
                 guard let uiModel = self?.cards.first(where: { $0.id == id }) else { return }
-                self?.displayMatchAnimation(for: uiModel)
+                self?.backgroundQueue.async {
+                    self?.matchAnimationSemaphore.wait()
+                    self?.displayMatchAnimation(for: uiModel)
+                }
             })
         default:
             return
@@ -161,13 +184,6 @@ extension DiscoverGymsViewController: SwipeCardStackDelegate {
     func didSwipeAllCards(_ cardStack: SwipeCardStack) {
         // TODO: No business rule has been defined for that scenario
         debugPrint("No more cards")
-    }
-
-    func displayMatchAnimation(for uiModel: GymUIModel) {
-        DispatchQueue.main.async {
-            self.matchView.setupSubtitle(subtitle: uiModel.name)
-            self.showMatchView()
-        }
     }
 }
 
@@ -192,8 +208,4 @@ extension DiscoverGymsViewController: SwipeCardStackDataSource {
     func numberOfCards(in cardStack: SwipeCardStack) -> Int {
         cards.count
     }
-}
-
-extension DiscoverGymsViewController {
-    
 }
