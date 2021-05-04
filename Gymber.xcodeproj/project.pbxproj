@@ -30,6 +30,7 @@
 		FAF5566626403C1500676443 /* GymMatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF5566526403C1500676443 /* GymMatchView.swift */; };
 		FAF5566B2640439F00676443 /* LocationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF5566A2640439F00676443 /* LocationHandler.swift */; };
 		FAF5569E26404C2000676443 /* DiscoverGymsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF5569D26404C2000676443 /* DiscoverGymsViewModelTests.swift */; };
+		FAF556F4264148B600676443 /* PKHUD in Frameworks */ = {isa = PBXBuildFile; productRef = FAF556F3264148B600676443 /* PKHUD */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,6 +77,7 @@
 				FAF55608263FE19E00676443 /* Kingfisher in Frameworks */,
 				FAD222A5263EFCE500DCF3EA /* Shuffle in Frameworks */,
 				FAAB2279263D57D900685708 /* Domain in Frameworks */,
+				FAF556F4264148B600676443 /* PKHUD in Frameworks */,
 				FAAB227B263D57D900685708 /* Network in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -228,6 +230,7 @@
 				FAAB227A263D57D900685708 /* Network */,
 				FAD222A4263EFCE500DCF3EA /* Shuffle */,
 				FAF55607263FE19E00676443 /* Kingfisher */,
+				FAF556F3264148B600676443 /* PKHUD */,
 			);
 			productName = Gymber;
 			productReference = FA97933B263C01030094A906 /* Gymber.app */;
@@ -281,6 +284,7 @@
 			packageReferences = (
 				FAD222A3263EFCE500DCF3EA /* XCRemoteSwiftPackageReference "Shuffle" */,
 				FAF55606263FE19D00676443 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				FAF556F2264148B600676443 /* XCRemoteSwiftPackageReference "PKHUD" */,
 			);
 			productRefGroup = FA97933C263C01030094A906 /* Products */;
 			projectDirPath = "";
@@ -614,6 +618,14 @@
 				minimumVersion = 6.3.0;
 			};
 		};
+		FAF556F2264148B600676443 /* XCRemoteSwiftPackageReference "PKHUD" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pkluz/PKHUD.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.4.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -634,6 +646,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = FAF55606263FE19D00676443 /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
+		};
+		FAF556F3264148B600676443 /* PKHUD */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FAF556F2264148B600676443 /* XCRemoteSwiftPackageReference "PKHUD" */;
+			productName = PKHUD;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

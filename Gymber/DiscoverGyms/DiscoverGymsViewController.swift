@@ -1,6 +1,7 @@
 import UIKit
 import Shuffle
 import CoreLocation
+import PKHUD
 
 final class DiscoverGymsViewController: UIViewController {
     private let cardsStackView = SwipeCardStack()
@@ -124,7 +125,14 @@ private extension DiscoverGymsViewController {
     }
 
     func getNearbyGyms(userLocation: CLLocation) {
+        DispatchQueue.main.async {
+            HUD.show(.progress)
+        }
+
         viewModel.getNearbyGyms(userLocation: userLocation, completion: { [weak self] result in
+            DispatchQueue.main.async {
+                HUD.hide()
+            }
             self?.handleGetNearbyGymsResult(result)
         })
     }
